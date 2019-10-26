@@ -35,13 +35,6 @@ class Quiz:
 		answer = None
 		data = None
 		
-		self.lenqst = len(lines)
-		while position < len(lines):
-			data = lines[position].split('\\')
-			question.append(data[0])
-			#answer = data[1]
-			position += 1
-
 
 	def started(self):
 		print(self.__running)
