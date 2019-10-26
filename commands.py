@@ -6,7 +6,10 @@ from module import *
 import utils.utils
 import utils.constants as const
 import utils.aws_utils as s3
+import quiz
 
+client = discord.Client()
+quiz = quiz.Quiz(client)
 
 # BOT COMMANDS
 
@@ -110,3 +113,18 @@ def get_commands(bot, logger):
         while i < 10 and i < len(visible_emojis_count):
             await bot.say(str(visible_emojis_count[i][0])+' a été utilisé '+str(visible_emojis_count[i][1])+' fois',)
             i += 1
+
+
+    #Quiz part here, don't touch if you don't know what you are doing
+
+    @bot.command()
+    async def startquiz(number: int):
+        await quiz.start(bot, number)
+
+    @bot.command()
+    async def statsquiz():
+        await bot.say('Affichage des meilleurs joueurs du quiz.')
+
+    @bot.command()
+    async def stopquiz():
+        await quiz.stop(bot)
