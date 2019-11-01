@@ -85,8 +85,10 @@ class Quiz:
 			self.current = self.question[qpos]
 			self.question.remove(self.current)
 			self.asked.append(self.current)
-			bot.send(self.current.ask_question())
+			message = self.current.ask_question()
+			await bot.say("Question : " + message)
 
+	
 
 class Question:
 
