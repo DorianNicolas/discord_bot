@@ -22,6 +22,7 @@ class Quiz:
 		self.lenqst = None
 		self.question = []
 		self.answer = []
+		self.asked = []
 
 		self.loadquestions()
 
@@ -79,14 +80,21 @@ class Quiz:
 			await bot.say('Aucun quiz en cours. !startquiz pour en lancer un.')
 
 	async def askqst(self, bot):
-		print(self.question[0])
-		#if self.__running:
-		#	qpos = random.randint(0, len(self.question) - 1)
-		#	self.current = self.question[qpos]
-		#	await bot.say('Question ici')
+		if self.__running:
+			qpos = random.randint(0, len(self.question) - 1)
+			self.current = self.question[qpos]
+			self.question.remove(self.current)
+			self.asked.append(self.current)
+			bot.send(self.current.ask_question())
+
 
 class Question:
 
 	def __init__(self, question, answer):
 		self.question = question
 		self.answer = answer
+
+	def ask_question(self):
+		question_text = ''
+		question_text += self.question
+		return question_text
